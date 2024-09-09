@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Conve
 from dotenv import load_dotenv
 from psycopg2 import Error
 
-
+load_dotenv()
 # Доступ по ssh к ПЭВМ
 host = os.getenv('RM_HOST')
 port = os.getenv('RM_PORT')
