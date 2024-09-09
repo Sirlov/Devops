@@ -3,23 +3,22 @@
 import logging, re, os, paramiko, psycopg2
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
-from dotenv import load_dotenv
 from psycopg2 import Error
 
 
-# Доступ по ssh к ПЭВМ
-host = os.getenv('RM_HOST')
-port = os.getenv('RM_PORT')
-username = os.getenv('RM_USER')
-password = os.getenv('RM_PASSWORD')
-hostDB = os.getenv('DB_HOST')
-portDB = os.getenv('DB_PORT')
-usernameBD = os.getenv('DB_USER')
-passwordDB = os.getenv('DB_PASSWORD')
-databaseDB = os.getenv('DB_DATABASE')
+# Доступ к ПЭВМ и базам
+host = os.environ['RM_HOST']
+port = os.environ['RM_PORT']
+username = os.environ['RM_USER']
+password = os.environ['RM_PASSWORD']
+hostDB = os.environ['DB_HOST']
+portDB = os.environ['DB_PORT']
+usernameBD = os.environ['DB_USER']
+passwordDB = os.environ['DB_PASSWORD']
+databaseDB = os.environ['DB_DATABASE']
 
 # Токен Telegram
-TOKEN = os.getenv('TOKEN')
+TOKEN = os.environ['TOKEN']
 
 # Логирование
 logging.basicConfig(
@@ -298,7 +297,7 @@ def send_long_message(update: Update, context, text):
 # Функция вывода логов репликации БД
 def get_repl_logs(update: Update, context):
 	ssh = ssh_connect(host, port, username, password)
-	stdin, stdout, stderr = ssh.exec_command('sudo tail -n 50 /var/log/postgresql/postgresql-15-main.log')
+	stdin, stdout, stderr = ssh.exec_command('sudo docker logs db_image 2>&1 | grep "replica"')
 	data = stdout.read().decode('utf-8')
 	ssh.close()
 	send_long_message(update,context,data)
