@@ -4,7 +4,7 @@ CREATE DATABASE DB_DATABASE;
 
 \c DB_DATABASE;
 
-CREATE TABLE IF NOT EXISTS Emails (
+CREATE TABLE IF NOT EXISTS Email (
     id SERIAL PRIMARY KEY,
     "Электронная почта" VARCHAR(100)
 );
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Phone (
 );
 
 
-INSERT INTO Emails ("Электронная почта") VALUES ('hruk@mail.ru'), ('kar@mail.ru');
+INSERT INTO Email ("Электронная почта") VALUES ('hruk@mail.ru'), ('kar@mail.ru');
 INSERT INTO Phone ("Номер телефона") VALUES ('+79995552233'), ('89031029977');
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO DB_REPL_USER;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT ON TABLES TO DB_REPL_USER;
