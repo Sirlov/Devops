@@ -3,7 +3,9 @@
 git clone https://github.com/Sirlov/Devops.git
 
 cd ./Devops/
+
 В директории бота созаем фаил .env:
+
 TOKEN = token - токен бота
 
 RM_HOST = rm_host - удаленный хост, который будем мониторить
