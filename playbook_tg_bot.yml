@@ -22,7 +22,7 @@
     - name: copy file 
       copy:
         src: /tmp/bot/bot/bot.py
-        dest: /home/ansible/bot
+        dest: /home/{{ all.vars.RM_USER }}/bot
         owner: "{{ all.vars.RM_USER }}"
         group: "{{ all.vars.RM_USER }}"
         mode: '777'
